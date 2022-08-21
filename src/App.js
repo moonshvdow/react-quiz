@@ -3,12 +3,12 @@ import './index.scss';
 import { questions } from './questions';
 
 
-const Result = ({correct, resetStep}) => {
+const Result = ({correct, reset}) => {
   return (
     <div className="result">
       <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
       <h2>Вы отгадали {correct} из {questions.length}</h2>
-      <button onClick={resetStep}>Попробовать снова</button>
+      <button onClick={reset}>Попробовать снова</button>
     </div>
   );
 }
@@ -39,10 +39,13 @@ function App() {
       setCorrect(correct + 1)
     }
   }
-  const resetStep = () => setStep(0)
+  const reset = () => {
+    setStep(0)
+    setCorrect(0)
+  }
   return (
     <div className="App">
-      { step !== questions.length ? <Game step={step} onClickVariant={onClickVariant} question={question}/> : <Result resetStep={resetStep} correct={correct}/> }
+      { step !== questions.length ? <Game step={step} onClickVariant={onClickVariant} question={question}/> : <Result reset={reset} correct={correct}/> }
     </div>
   );
 }
